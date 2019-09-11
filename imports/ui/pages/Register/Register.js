@@ -70,7 +70,7 @@ class Register extends React.Component {
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('email')(
-                        <Input prefix={<Icon type="copy" style={{fontSize: 13}}/>} placeholder="Email"/>
+                        <Input prefix={<Icon type="mail" style={{fontSize: 13}}/>} placeholder="Email"/>
                     )}
                 </FormItem>
                 <FormItem>

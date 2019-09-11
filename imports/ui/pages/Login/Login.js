@@ -2,11 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { Card, Row, Layout, Form, Icon, Input, Button, Checkbox, notification } from 'antd';
+const FormItem = Form.Item;
 
-// import components
-import Alert from '../../components/Alert';
-
-// import styles
 import './Login.scss';
 
 class Login extends React.Component {
@@ -16,6 +14,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       errMsg: null,
+      submitLoading: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,12 +35,20 @@ class Login extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { email, password } = this.state;
-    Meteor.loginWithPassword(email, password, err => {
-      if (err) {
-        this.setState({ errMsg: err.reason });
-        return console.log(err);
-      }
+    this.props.form.validateFields((err, values) => {
+        if (err) {
+            return notification.error(err);
+        }
+        this.setState({
+            submitLoading:true
+        });
+        Meteor.loginWithPassword(values.email, values.password, loginError => {
+            this.setState({
+                submitLoading:false
+            });
+            if (loginError)
+                notification.error(loginError);
+        });
     });
   }
   render() {
@@ -50,67 +57,46 @@ class Login extends React.Component {
     }
 
     const { errMsg } = this.state;
+    const { getFieldDecorator } = this.props.form;
     return (
-      <section className="login-page">
-        <div className="card mx-auto" style={{ maxWidth: '28rem' }}>
-          <div className="card-header">
-            <div className="brand">
-            </div>
-            <div className="card-body">
-              <h4 className="card-title">Login</h4>
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="email">E-Mail Address</label>
-
-                  <input
-                    id="email"
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <div className="spread-container">
-                    <label htmlFor="password">Password</label>
-                  </div>
-                  <input
-                    id="password"
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={e => this.setState({ password: e.target.value })}
-                    required
-                  />
-                  <NavLink to="/recover-password">Forgot Password?</NavLink>
-                </div>
-                <div className="form-group no-margin">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block mb-2"
-                  >
-                    Login
-                  </button>
-                  {errMsg && <Alert errMsg={errMsg} />}
-                </div>
-                <div className="margin-top20">
-                  Don&apos;t have an account?{' '}
-                  <NavLink to="/register">Create one</NavLink>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+            <Card className="form-login-register">
+                <Row className="main_content">
+        <Form onSubmit={this.handleSubmit} className="login-form">
+            <FormItem>
+                {getFieldDecorator('email', {
+                    rules: [{ required: true, message: 'Please enter your email or username' }],
+                })(
+                    <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Email or Username" />
+                )}
+            </FormItem>
+            <FormItem>
+                {getFieldDecorator('password', {
+                    rules: [{ required: true, message: 'Please enter your password' }],
+                })(
+                    <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+                )}
+            </FormItem>
+            <FormItem>
+                {getFieldDecorator('remember', {
+                    valuePropName: 'checked',
+                    initialValue: true,
+                })(
+                    <Checkbox>Remember me</Checkbox>
+                )}
+                <a style={{float:"right"}} href="/forgotpassword">Forgot password</a>
+                <Button loading={this.state.submitLoading} type="primary" htmlType="submit" style={{width:"100%"}}>
+                    Log in
+                </Button>
+                Or <a href="/register" >register now!</a>
+            </FormItem>
+        </Form>
+                </Row>
+            </Card>
     );
   }
 }
 
-export default Login;
+export default Form.create()(Login);
 
 Login.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
