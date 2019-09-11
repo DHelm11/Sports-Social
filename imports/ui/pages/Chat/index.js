@@ -14,8 +14,8 @@ class Message extends React.Component {
                 <p>{data.message}</p>
               }
               datetime={
-                <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-                  <span>{moment().fromNow()}</span>
+                <Tooltip title={moment(data.date).format('YYYY-MM-DD HH:mm:ss')}>
+                  <span>{moment(data.date).fromNow()}</span>
                 </Tooltip>
               }
             />
@@ -37,12 +37,18 @@ class Chat extends React.Component {
       this.state.messages.push(message);
       this.setState(this.state);
     });
+    Meteor.call("chat/messages", (error, result) => {
+      if (!error) {
+        this.setState({messages: result});
+      }
+    });
   }
   handleKeyPress = (event) => {
     if (event.key === 'Enter'){
       const message = {
         sender: Meteor.user() ? Meteor.user().username : 'anonymous',
-        message: event.target.value
+        message: event.target.value,
+        date: Date()
       };
       streamer.emit('message', message);
       this.setState({messages: this.state.messages.concat(message), messageBoxText: ""});
