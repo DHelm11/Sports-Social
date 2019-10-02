@@ -28,7 +28,6 @@ const chatStyle = {
 };
 
 const streamer = new Meteor.Streamer('chat');
-const chatMessages = new Mongo.Collection('chatMessages');
 
 class Chat extends React.Component {
   constructor() {

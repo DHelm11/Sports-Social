@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 // import routes
-import Landing from '../pages/Landing';
+import NewsFeed from '../pages/NewsFeed/NewsFeed.js';
 import Chat from '../pages/Chat';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -38,7 +38,7 @@ const App = props => (
       {props.loggingIn && <Spinner />}
       <Content>
         <Switch>
-          <PropsRoute exact path="/" component={Landing} {...props} />
+          <PropsRoute exact path="/" component={NewsFeed} {...props} />
           <PropsRoute exact path="/chat" component={Chat} {...props} />
           <PropsRoute path="/login" component={Login} {...props} />
           <PropsRoute path="/register" component={Register} {...props} />

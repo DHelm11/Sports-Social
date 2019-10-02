@@ -59,7 +59,7 @@ class Login extends React.Component {
     const { errMsg } = this.state;
     const { getFieldDecorator } = this.props.form;
     return (
-            <Card className="form-login-register">
+            <Card>
                 <Row className="main_content">
         <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
