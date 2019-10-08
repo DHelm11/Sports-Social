@@ -83,7 +83,7 @@ class Login extends React.Component {
                 })(
                     <Checkbox>Remember me</Checkbox>
                 )}
-                <a style={{float:"right"}} href="/forgotpassword">Forgot password</a>
+                <a style={{float:"right"}} href="/recover-password">Forgot password</a>
                 <Button loading={this.state.submitLoading} type="primary" htmlType="submit" style={{width:"100%"}}>
                     Log in
                 </Button>

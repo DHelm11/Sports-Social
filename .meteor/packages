@@ -41,3 +41,4 @@ lacosta:method-hooks
 tunifight:loggedin-mixin
 underscore@1.0.10
 rocketchat:streamer
+email
