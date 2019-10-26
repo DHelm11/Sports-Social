@@ -1,0 +1,19 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\client",
+    "\\imports",
+    "\\imports\\api",
+    "\\imports\\api\\remote",
+    "\\imports\\api\\users",
+    "\\imports\\ui",
+    "\\imports\\ui\\pages",
+    "\\imports\\ui\\pages\\Profile",
+    "\\imports\\ui\\pages\\RecoverPassword",
+    "\\imports\\ui\\pages\\Register",
+    "\\imports\\ui\\pages\\ResetPassword",
+    "\\server"
+  ],
+  "SelectedNode": "\\imports\\ui\\pages\\Register\\Register.js",
+  "PreviewInSolutionExplorer": false
+}

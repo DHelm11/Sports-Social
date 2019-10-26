@@ -10,8 +10,8 @@ streamer.on('message', message => {
 
 import accounts from './accounts';
 Meteor.methods({
-    'accounts/create':accounts.create,
-    'accounts/sendResetEmail':accounts.sendResetEmail,
+    'accounts/create': accounts.create,
+    'accounts/sendResetEmail': accounts.sendResetEmail,
     'accounts/toggleVerification':accounts.toggleVerification,
     'accounts/deleteUser': accounts.deleteUser,
     "chat/messages": () => chatMessages.find().fetch()
