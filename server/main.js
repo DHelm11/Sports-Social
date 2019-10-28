@@ -43,6 +43,17 @@ Meteor.methods({
     'news-feed/delete-post': id => publicNewsFeed.remove({ _id: id }, true),
 });
 
+Meteor.startup(function () {
+    smtp = {
+        username: 'sportssocialwebsite@gmail.com',   // eg: server@gentlenode.com
+        password: 'spring_19',   // eg: 3eeP1gtizk5eziohfervU
+        server: 'smtp.gmail.com',  // eg: mail.gandi.net
+        port: 465
+    }
+
+    process.env.MAIL_URL = 'smtps://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+});
+
 import '/imports/startup/server';
 import '/imports/startup/both';
 
