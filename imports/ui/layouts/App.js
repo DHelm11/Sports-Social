@@ -29,38 +29,50 @@ import PropsRoute from '../pages/PropsRoute';
 import { Layout } from 'antd';
 const { Header, Content, Footer } = Layout;
 
-const App = props => (
-  <Layout className="layout">
-    <Router>
-      <Header>
-        <PropsRoute component={Navbar} {...props} />
-      </Header>
-      {props.loggingIn && <Spinner />}
-      <Content>
-        <Switch>
-          <PropsRoute exact path="/" component={NewsFeed} {...props} />
-          <PropsRoute exact path="/chat" component={Chat} {...props} />
-          <PropsRoute path="/login" component={Login} {...props} />
-          <PropsRoute path="/register" component={Register} {...props} />
-          <PropsRoute exact path="/profile" component={Profile} {...props} />
-          <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
-          <PropsRoute
-            path="/recover-password"
-            component={RecoverPassword}
-            {...props}
-          />
-          <PropsRoute
-            path="/reset-password/:token"
-            component={ResetPassword}
-            {...props}
-          />
-          <PropsRoute component={NotFound} {...props} />
-        </Switch>
-      </Content>
-    </Router>
-    <Footer style={{ textAlign: 'center' }}>Team Leftovers &copy; {new Date().getFullYear()}</Footer>
-  </Layout>
-);
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {chatLayout: false};
+  }
+  setChatLayout(enabled) {
+    this.setState({chatLayout: enabled});
+  }
+  render() {
+    const props = this.props;
+    return (
+      <Layout className={"layout" + (this.state.chatLayout ? " chat-layout" : "")}>
+        <Router>
+          <Header>
+            <PropsRoute component={Navbar} {...props} />
+          </Header>
+          {props.loggingIn && <Spinner />}
+          <Content>
+            <Switch>
+              <PropsRoute exact path="/" component={NewsFeed} {...props} />
+              <PropsRoute exact path="/chat" component={Chat} setChatLayout={this.setChatLayout.bind(this)} {...props} />
+              <PropsRoute path="/login" component={Login} {...props} />
+              <PropsRoute path="/register" component={Register} {...props} />
+              <PropsRoute exact path="/profile" component={Profile} {...props} />
+              <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
+              <PropsRoute
+                path="/recover-password"
+                component={RecoverPassword}
+                {...props}
+              />
+              <PropsRoute
+                path="/reset-password/:token"
+                component={ResetPassword}
+                {...props}
+              />
+              <PropsRoute component={NotFound} {...props} />
+            </Switch>
+          </Content>
+        </Router>
+        <Footer style={{ textAlign: 'center' }}>Team Leftovers &copy; {new Date().getFullYear()}</Footer>
+      </Layout>
+    );
+  }
+}
 
 App.propTypes = {
   loggingIn: PropTypes.bool.isRequired,

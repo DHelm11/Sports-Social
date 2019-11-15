@@ -1,12 +1,26 @@
 // Server entry point, imports all server code
-const streamer = new Meteor.Streamer('chat');
-streamer.allowRead('all');
-streamer.allowWrite('all');
-
-const chatMessages = new Mongo.Collection('chatMessages');
-streamer.on('message', message => {
-  chatMessages.insert(message);
+const chatRooms = new Mongo.Collection('chatRooms');
+chatRooms.insert({_id: "Public"}, () => {});
+const chatRoomMessages = new Map();
+chatRooms.find().observe({ added: ({_id}) => {
+    const collection = new Mongo.Collection('chatRoom_' + _id)
+    const streamer = new Meteor.Streamer('chatRoom_' + _id);
+    streamer.allowRead('all');
+    streamer.allowWrite('all');
+    streamer.on('message', message => {
+      collection.insert(message);
+    });
+    chatRoomMessages.set(_id, {collection, streamer});
+  }
 });
+Meteor.publish('chatRooms', () =>
+  chatRooms.find({}, {
+    fields: { _id: 1, password: 1 },
+    transform: ({_id, password}) => {
+      return {name: _id, password: !!password};
+    }
+  })
+);
 
 import accounts from './accounts';
 Meteor.methods({
@@ -14,7 +28,15 @@ Meteor.methods({
     'accounts/sendResetEmail': accounts.sendResetEmail,
     'accounts/toggleVerification':accounts.toggleVerification,
     'accounts/deleteUser': accounts.deleteUser,
-    "chat/messages": () => chatMessages.find().fetch()
+    "chat/messages": (name, password) => {
+      const room = chatRooms.findOne(name);
+      if (!room)
+        throw new Meteor.Error("chatRoom.notFound");
+      if (room.password && room.password !== password)
+        throw new Meteor.Error("chatRoom.incorrectPassword");
+      return chatRoomMessages.get(name).collection.find().fetch();
+    },
+    "chat/createRoom": (name, password) => chatRooms.insert({_id: name, password})
 });
 
 const newsFeedStreamer = new Meteor.Streamer('publicNewsFeed');
