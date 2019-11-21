@@ -6,7 +6,6 @@ import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check';
 import { Promise } from 'meteor/promise';
 
-import { Users } from '../../../api/remote/users.js';
 import React from 'react';
 
 
