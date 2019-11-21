@@ -1,8 +1,9 @@
 import React from 'react';
+import './TeamPages.scss';
 
 const TeamPages = () => (
   <div className="team-pages-page">
-    <div>
+
     <h2>Team Profiles</h2>
 
     <a href="ArizonaCardinals.html">
