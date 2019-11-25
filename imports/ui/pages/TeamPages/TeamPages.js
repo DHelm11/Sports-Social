@@ -1,13 +1,15 @@
 import React from 'react';
 import './TeamPages.scss';
+import '../Logos';
 
 const TeamPages = () => (
   <div className="team-pages-page">
 
     <h2>Team Profiles</h2>
 
-    <a href="ArizonaCardinals.html">
-      <img src="Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style="width:250px;height:250px;border:0"/>
+//    <a href="ArizonaCardinals.html">
+      <a href="#">
+      <img src="../Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style="width:250px;height:250px;border:0"/>
     </a>
 
     <a href="AtlantaFalcons.html">
