@@ -39,6 +39,12 @@ const Navbar = ({ loggedIn }) => (
               Profile
             </NavLink>
           </Menu.Item>
+          <Menu.Item key="editProfile">
+            <NavLink to="/EditProfile">Edit Profile</NavLink>
+          </Menu.Item>
+          <Menu.Item key="changePassword">
+            <NavLink to="/ChangePassword">Change Password</NavLink>
+          </Menu.Item>
           <Menu.Item key="logout">
             <NavLink to="/login" onClick={() => Meteor.logout()}>
                 Logout

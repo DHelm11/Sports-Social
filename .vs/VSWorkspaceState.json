@@ -3,17 +3,15 @@
     "",
     "\\client",
     "\\imports",
-    "\\imports\\api",
-    "\\imports\\api\\remote",
-    "\\imports\\api\\users",
     "\\imports\\ui",
+    "\\imports\\ui\\components",
+    "\\imports\\ui\\components\\Navbar",
+    "\\imports\\ui\\layouts",
     "\\imports\\ui\\pages",
-    "\\imports\\ui\\pages\\Profile",
+    "\\imports\\ui\\pages\\EditProfile",
     "\\imports\\ui\\pages\\RecoverPassword",
-    "\\imports\\ui\\pages\\Register",
-    "\\imports\\ui\\pages\\ResetPassword",
-    "\\server"
+    "\\imports\\ui\\pages\\ResetPassword"
   ],
-  "SelectedNode": "\\imports\\ui\\pages\\Register\\Register.js",
+  "SelectedNode": "\\imports\\ui\\pages\\EditProfile\\EditProfile.js",
   "PreviewInSolutionExplorer": false
 }

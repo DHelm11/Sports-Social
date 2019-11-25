@@ -19,6 +19,8 @@ import Profile from '../pages/Profile';
 import NotFound from '../pages/Not-Found';
 import RecoverPassword from '../pages/RecoverPassword';
 import ResetPassword from '../pages/ResetPassword';
+import ChangePassword from '../pages/ChangePassword';
+import EditProfile from '../pages/EditProfile';
 import TeamPages from '../pages/TeamPages';
 
 // import Spinner
@@ -56,6 +58,8 @@ class App extends React.Component {
               <PropsRoute exact path="/profile" component={Profile} {...props} />
               <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
               <PropsRoute exact path="/teampage" component={TeamPages} {...props} />
+              <PropsRoute exact path="/EditProfile" component={EditProfile} {...props} />
+              <PropsRoute exact path="/ChangePassword" component={ChangePassword} {...props} />
               <PropsRoute
                 path="/recover-password"
                 component={RecoverPassword}
