@@ -56,7 +56,9 @@ class Profile extends React.Component {
     return (
       <div className="profile-page">
         <h1>Profile Page</h1>
-        <Button target="userId" type="primary" title="Click for User Info" />
+        <h2>
+          {Meteor.user(username)}
+        </h2>
       </div>
     );
   }
