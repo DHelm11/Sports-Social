@@ -57,17 +57,10 @@ class Profile extends React.Component {
       <div className="profile-page">
         <h1>Profile Page</h1>
         <Button target="userId" type="primary" title="Click for User Info" />
-//        {countersReady && (
           <Modal
             target="userId"
             title="User Info"
-//            body={Meteor.userId()}
-//            counter={counter}
           />
-//        )}
-        <hr />
-  //      {countersReady && <Text count={counter.count} />}
-        <AddCountButton />
       </div>
     );
   }
