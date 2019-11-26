@@ -65,8 +65,8 @@ class Profile extends React.Component {
 //            counter={counter}
           />
 //        )}
-        <hr/>
-        {countersReady && <Text count={counter.count} />}
+        <hr />
+  //      {countersReady && <Text count={counter.count} />}
         <AddCountButton />
       </div>
     );
