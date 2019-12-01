@@ -6,7 +6,7 @@ const TeamPages = () => (
 
     <h2>Team Profiles</h2>
 
-    <a href="ArizonaCardinals.html">
+  /*  <a href="ArizonaCardinals.html">
       <img src="Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style="width:250px;height:250px;border:0"/>
     </a>
 
@@ -132,7 +132,7 @@ const TeamPages = () => (
 
     <a href="WashingtonRedskins.html">
       <img src="Logos/WashingtonRedskins.png" alt="Washington Redskins" style="width:250px;height:250px;border:0"/>
-    </a>
+    </a> */
   </div>
 );
 
