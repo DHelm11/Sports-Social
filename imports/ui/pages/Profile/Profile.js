@@ -56,7 +56,6 @@ class Profile extends React.Component {
     return (
       <div className="profile-page">
         <h1>Profile Page</h1>
-        <h2>{currentUser.username}</h2>
       </div>
     );
   }
