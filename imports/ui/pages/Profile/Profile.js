@@ -56,9 +56,6 @@ class Profile extends React.Component {
     return (
       <div className="profile-page">
         <h1>Profile Page</h1>
-        <template className="user">
-          <p>{firstName}</p>
-        </template>
       </div>
     );
   }
@@ -69,11 +66,7 @@ Profile.defaultProps = {
   counter: null,
 };
 
-Template.user.helpers({
-  firstName: function() {
-    return Meteor.user().profile.first_name;
-  }
-});
+
 
 Profile.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
