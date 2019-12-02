@@ -87,7 +87,7 @@ const TeamPages = () => (
       </a>
 
       <a href="NewEnglandPatriots.html">
-        <Imge src="Logos/NewEnglandPatriots.png" alt="New England Patriots" style="width:250px;height:250px;border:0"/>
+        <Image src="Logos/NewEnglandPatriots.png" alt="New England Patriots" style="width:250px;height:250px;border:0"/>
       </a>
 
       <a href="NewOrleansSaints.html">
