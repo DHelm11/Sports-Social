@@ -7,11 +7,11 @@ const TeamPages = () => (
     <h2>Team Profiles</h2>
 
       <a href="ArizonaCardinals.html">
-        <img src="../Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style={{width:250,height:250,border:0}}/>
+        <img src={require('Logos/ArizonaCardinals.png')} alt="Arizona Cardinals" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="AtlantaFalcons.html">
-        <img src="Logos/AtlantaFalcons.png" alt="Atlanta Falcons" style={{width:250,height:250,border:0}}/>
+        <img src={require('Logos/AtlantaFalcons.png')} alt="Atlanta Falcons" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="BaltimoreRavens.html">
