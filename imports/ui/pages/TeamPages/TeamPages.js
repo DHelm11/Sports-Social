@@ -7,27 +7,27 @@ const TeamPages = () => (
     <h2>Team Profiles</h2>
 
       <a href="ArizonaCardinals.html">
-        <img src={require('Logos/ArizonaCardinals.png')} alt="Arizona Cardinals" style={{width:250,height:250,border:0}}/>
+        <img src={'Logos/ArizonaCardinals.png'} alt="Arizona Cardinals" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="AtlantaFalcons.html">
-        <img src={require('Logos/AtlantaFalcons.png')} alt="Atlanta Falcons" style={{width:250,height:250,border:0}}/>
+        <img src={'Logos/AtlantaFalcons.png'} alt="Atlanta Falcons" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="BaltimoreRavens.html">
-        <img src="Logos/balitimoreravens.png" alt="Balitimore Ravens" style={{width:250,height:250,border:0}}/>
+        <img src={'Logos/balitimoreravens.png'} alt="Balitimore Ravens" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="BuffaloBills.html">
-        <img src="Logos/BuffaloBills.png" alt="Buffalo Bills" style={{width:250,height:250,border:0}}/>
+        <img src={Logos/BuffaloBills.png} alt="Buffalo Bills" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="CarolinaPanthers.html">
-        <img src="Logos/CarolinaPanthers.png" alt="Carolina Panthers" style={{width:250,height:250,border:0}}/>
+        <img src={Logos/CarolinaPanthers.png} alt="Carolina Panthers" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="ChicagoBears.html">
-        <img src="Logos/ChicagoBears.png" alt="" style={{width:250,height:250,border:0}}/>
+        <img src={'Logos/ChicagoBears.png'} alt="Chicago Bears" style={{width:250,height:250,border:0}}/>
       </a>
 
       <a href="CincinnatiBengals.html">
