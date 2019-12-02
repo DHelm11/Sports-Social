@@ -5,13 +5,11 @@
     "\\imports",
     "\\imports\\ui",
     "\\imports\\ui\\components",
-    "\\imports\\ui\\components\\Navbar",
     "\\imports\\ui\\layouts",
     "\\imports\\ui\\pages",
-    "\\imports\\ui\\pages\\EditProfile",
-    "\\imports\\ui\\pages\\RecoverPassword",
-    "\\imports\\ui\\pages\\ResetPassword"
+    "\\imports\\ui\\pages\\ChangePassword",
+    "\\imports\\ui\\pages\\RecoverPassword"
   ],
-  "SelectedNode": "\\imports\\ui\\pages\\EditProfile\\EditProfile.js",
+  "SelectedNode": "\\imports\\ui\\pages\\ChangePassword\\ChangePassword.js",
   "PreviewInSolutionExplorer": false
 }

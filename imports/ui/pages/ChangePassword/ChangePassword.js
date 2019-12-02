@@ -9,7 +9,7 @@ class ChangePassword extends React.Component {
         return (
             <div className="change-password-page">
                 <h1>Change Password</h1>
-                <form onSubmit={() => event.preventDefault()}>
+                <form id="submit-info" onSubmit={() => event.preventDefault()}>
                     <label>Old Password</label>
                     <input id="oldPass" type="password"></input>
                     <label>New Password</label>
@@ -21,7 +21,17 @@ class ChangePassword extends React.Component {
     }
 
     handler() {
-        console.log("This should change the password.");
+        const oldPass = document.forms['submit-info'].querySelector("#oldPass").value;
+        const newPass = document.forms['submit-info'].querySelector("#newPass").value;
+        Accounts.changePassword(oldPass, newPass, function (err) {
+            if (err) {
+                alert(err);
+            } else {
+                alert("Password Changed");
+            }
+        });
+        document.forms['submit-info'].querySelector("#oldPass").value = "";
+        document.forms['submit-info'].querySelector("#newPass").value = "";
     }
 
 }
