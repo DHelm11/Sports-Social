@@ -1,15 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\client",
     "\\imports",
+    "\\imports\\startup",
     "\\imports\\ui",
     "\\imports\\ui\\components",
     "\\imports\\ui\\layouts",
     "\\imports\\ui\\pages",
-    "\\imports\\ui\\pages\\ChangePassword",
-    "\\imports\\ui\\pages\\RecoverPassword"
+    "\\imports\\ui\\pages\\RecoverPassword",
+    "\\server"
   ],
-  "SelectedNode": "\\imports\\ui\\pages\\ChangePassword\\ChangePassword.js",
+  "SelectedNode": "\\imports\\ui\\pages\\RecoverPassword\\RecoverPassword.js",
   "PreviewInSolutionExplorer": false
 }

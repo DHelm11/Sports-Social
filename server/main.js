@@ -76,6 +76,12 @@ Meteor.startup(function () {
     process.env.MAIL_URL = 'smtps://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 });
 
+Meteor.startup(function () {
+    Accounts.urls.resetPassword = function (token) {
+        return Meteor.absoluteUrl('reset-password/' + token);
+    };
+});
+
 import '/imports/startup/server';
 import '/imports/startup/both';
 
