@@ -31,10 +31,12 @@ class Chat extends React.Component {
     super(props);
     props.setChatLayout(true);
     const urlParams = new URLSearchParams(window.location.search);
-    const room = urlParams.get("room");
+    let room = urlParams.get("room");
     this.initialPassword = urlParams.get("password");
     this.passwords = {};
-    if (room && this.initialPassword) {
+    if (!room) {
+      room = "Public";
+    } else if (this.initialPassword) {
       this.passwords = JSON.parse(window.localStorage.getItem("chatRoomPasswords"));
       this.passwords = this.passwords ? this.passwords : {};
       this.passwords[room] = this.initialPassword;
@@ -99,7 +101,18 @@ class Chat extends React.Component {
             }
         }>
         <Menu.ItemGroup key="chatRooms" title={
-            <span>Chat Rooms <Icon type="plus" className="add-button" onClick={() => {
+            <span>Chat Rooms <Icon type="user-add" className="add-button" onClick={() => {
+              const username = prompt("Enter username to invite to \"" + this.state.room + "\" room:");
+              if (!username) {
+                return;
+              }
+              Meteor.call("chat/inviteUser", this.state.room, username, (error, result) => {
+                if (error) {
+                  alert("Error: " + error.error);
+                }
+              });
+            }}/>
+            <Icon type="plus" className="add-button" onClick={() => {
               const name = prompt("New chat room name:");
               if (!/[\w-]+/.test(name)) {
                 alert("Invalid chat room name");
@@ -121,7 +134,7 @@ class Chat extends React.Component {
           {this.props.chatRooms.map(room =>
             <Menu.Item
                 key={room._id}
-                disabled={room.password && !this.passwords[room._id]}
+                disabled={!room.unlocked && !this.passwords[room._id]}
               >
               {room._id} {room.password ? <Icon type="lock"/> : ""}
             </Menu.Item>
