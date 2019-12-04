@@ -31,10 +31,12 @@ class Chat extends React.Component {
     super(props);
     props.setChatLayout(true);
     const urlParams = new URLSearchParams(window.location.search);
-    const room = urlParams.get("room");
+    let room = urlParams.get("room");
     this.initialPassword = urlParams.get("password");
     this.passwords = {};
-    if (room && this.initialPassword) {
+    if (!room) {
+      room = "Public";
+    } else if (this.initialPassword) {
       this.passwords = JSON.parse(window.localStorage.getItem("chatRoomPasswords"));
       this.passwords = this.passwords ? this.passwords : {};
       this.passwords[room] = this.initialPassword;
