@@ -13,14 +13,23 @@ chatRooms.find().observe({ added: ({_id}) => {
     chatRoomMessages.set(_id, {collection, streamer});
   }
 });
-Meteor.publish('chatRooms', () =>
-  chatRooms.find({}, {
-    fields: { _id: 1, password: 1 },
-    transform: ({_id, password}) => {
-      return {name: _id, password: !!password};
+Meteor.publish('chatRooms', function() {
+  const user = Meteor.user();
+  const privateChatRooms = new Set(user && user.privateChatRooms ? user.privateChatRooms : []);
+  chatRooms.find().forEach(chatRoom => {
+    chatRoom.unlocked = chatRoom.password ? privateChatRooms.has(chatRoom._id) : true;
+    chatRoom.password = !!chatRoom.password;
+    this.added("chatRooms", chatRoom._id, chatRoom);
+  });
+  Meteor.users.find(this.userId, { fields: { privateChatRooms: 1 } }).observeChanges({
+    changed: (userId, {privateChatRooms}) => {
+      privateChatRooms.forEach(chatRoom => {
+        this.changed("chatRooms", chatRoom, {unlocked: true});
+      });
     }
-  })
-);
+  });
+  this.ready();
+});
 
 import accounts from './accounts';
 Meteor.methods({
@@ -32,11 +41,26 @@ Meteor.methods({
       const room = chatRooms.findOne(name);
       if (!room)
         throw new Meteor.Error("chatRoom.notFound");
-      if (room.password && room.password !== password)
+      const user = Meteor.user();
+      const privateChatRooms = user && user.privateChatRooms ? user.privateChatRooms : [];
+      if (room.password && room.password !== password && !privateChatRooms.find(x => x === name))
         throw new Meteor.Error("chatRoom.incorrectPassword");
       return chatRoomMessages.get(name).collection.find().fetch();
     },
-    "chat/createRoom": (name, password) => chatRooms.insert({_id: name, password})
+    "chat/inviteUser": (roomName, userId) => {
+      const recipient = Meteor.users.findOne(userId);
+      if (!recipient)
+        throw new Meteor.Error("chatRoom.unknownUser");
+      recipient.privateChatRooms = recipient.privateChatRooms ? recipient.privateChatRooms : [];
+      if (recipient.privateChatRooms.find(x => x === roomName))
+        throw new Meteor.Error("chatRoom.alreadyInvited");
+      recipient.privateChatRooms.push(roomName);
+      Meteor.users.update(userId, recipient);
+    },
+    "chat/createRoom": (name, password) => {
+      chatRooms.insert({_id: name, password});
+      Meteor.users.update(Meteor.userId(), { $push: { privateChatRooms: name } });
+    }
 });
 
 const newsFeedStreamer = new Meteor.Streamer('publicNewsFeed');

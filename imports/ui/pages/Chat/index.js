@@ -123,7 +123,7 @@ class Chat extends React.Component {
           {this.props.chatRooms.map(room =>
             <Menu.Item
                 key={room._id}
-                disabled={room.password && !this.passwords[room._id]}
+                disabled={!room.unlocked && !this.passwords[room._id]}
               >
               {room._id} {room.password ? <Icon type="lock"/> : ""}
             </Menu.Item>
