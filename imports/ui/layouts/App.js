@@ -57,7 +57,7 @@ class App extends React.Component {
               <PropsRoute path="/register" component={Register} {...props} />
               <PropsRoute exact path="/profile" component={Profile} {...props} />
               <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
-              <PropsRoute exact path="/teampage" component={TeamPages} {...props} />
+              <PropsRoute exact path="/TeamPages" component={TeamPages} {...props} />
               <PropsRoute exact path="/EditProfile" component={EditProfile} {...props} />
               <PropsRoute exact path="/ChangePassword" component={ChangePassword} {...props} />
               <PropsRoute

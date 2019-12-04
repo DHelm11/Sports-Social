@@ -17,8 +17,8 @@ const Navbar = ({ loggedIn }) => (
     <Menu.Item key="chat">
       <NavLink to="/chat">Chat</NavLink>
     </Menu.Item>
-	<Menu.Item key="teampage">
-      <NavLink to="/teampage">Team Pages</NavLink>
+	<Menu.Item key="TeamPages">
+      <NavLink to="/TeamPages">Team Pages</NavLink>
     </Menu.Item>
 
     {!loggedIn && (

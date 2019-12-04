@@ -2,14 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\imports",
+    "\\imports\\api",
+    "\\imports\\api\\remote",
     "\\imports\\startup",
     "\\imports\\ui",
-    "\\imports\\ui\\components",
-    "\\imports\\ui\\layouts",
     "\\imports\\ui\\pages",
-    "\\imports\\ui\\pages\\RecoverPassword",
+    "\\imports\\ui\\pages\\EditProfile",
     "\\server"
   ],
-  "SelectedNode": "\\imports\\ui\\pages\\RecoverPassword\\RecoverPassword.js",
+  "SelectedNode": "\\server\\main.js",
   "PreviewInSolutionExplorer": false
 }
