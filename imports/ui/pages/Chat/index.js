@@ -101,7 +101,18 @@ class Chat extends React.Component {
             }
         }>
         <Menu.ItemGroup key="chatRooms" title={
-            <span>Chat Rooms <Icon type="plus" className="add-button" onClick={() => {
+            <span>Chat Rooms <Icon type="user-add" className="add-button" onClick={() => {
+              const username = prompt("Enter username to invite to \"" + this.state.room + "\" room:");
+              if (!username) {
+                return;
+              }
+              Meteor.call("chat/inviteUser", this.state.room, username, (error, result) => {
+                if (error) {
+                  alert("Error: " + error.error);
+                }
+              });
+            }}/>
+            <Icon type="plus" className="add-button" onClick={() => {
               const name = prompt("New chat room name:");
               if (!/[\w-]+/.test(name)) {
                 alert("Invalid chat room name");

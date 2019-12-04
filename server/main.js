@@ -47,15 +47,15 @@ Meteor.methods({
         throw new Meteor.Error("chatRoom.incorrectPassword");
       return chatRoomMessages.get(name).collection.find().fetch();
     },
-    "chat/inviteUser": (roomName, userId) => {
-      const recipient = Meteor.users.findOne(userId);
+    "chat/inviteUser": (roomName, username) => {
+      const recipient = Meteor.users.findOne({username});
       if (!recipient)
         throw new Meteor.Error("chatRoom.unknownUser");
       recipient.privateChatRooms = recipient.privateChatRooms ? recipient.privateChatRooms : [];
       if (recipient.privateChatRooms.find(x => x === roomName))
         throw new Meteor.Error("chatRoom.alreadyInvited");
       recipient.privateChatRooms.push(roomName);
-      Meteor.users.update(userId, recipient);
+      Meteor.users.update({username}, recipient);
     },
     "chat/createRoom": (name, password) => {
       chatRooms.insert({_id: name, password});
