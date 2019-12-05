@@ -108,10 +108,14 @@ Meteor.startup(function () {
 
 import { Mongo } from 'meteor/mongo';
 const userProfileSettings = new Mongo.Collection("userProfileSettings");
-userProfileSettings.allow({ insert: () => true, update: () => true, remove: () => true });
+userProfileSettings.allow({ insert: () => true, update: () => true, remove: () => true1 });
 Meteor.methods({
     updateUserProfile(id, bioInfo, favteam, favpo, favpt, favptr) {
         userProfileSettings.upsert({ '_id': id }, { '_id': id, 'bio': bioInfo, 'favoriteTeam': favteam, 'fpo': favpo, 'fpt': favpt, 'fptr': favptr });
+    },
+
+    getUserProfile(id) {
+        return userProfileSettings.find({ '_id': id }).fetch();
     }
 });
 

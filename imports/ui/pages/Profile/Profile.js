@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Session } from 'meteor/session'
 
 // collection
 import Counters from '../../../api/counters/counters';
@@ -32,7 +33,7 @@ class Profile extends React.Component {
       return false;
     }
     return true;
-  }
+    }
 
   render() {
     const {
@@ -50,15 +51,33 @@ class Profile extends React.Component {
     console.log('usersReady', usersReady);
     console.log('users', users);
     */
-    if (!loggedIn) {
-      return null;
-    }
+      if (!loggedIn) {
+          return null;
+      }
+
     return (
       <div className="profile-page">
-        <h1>Profile Page</h1>
+            <h1>Profile Page</h1>
+            <div id="profileDiv">
+                <div id="profileItem"><h2>Bio</h2><p>You don't have anything in your biography!</p></div>
+                <div id="profileItem"><h2>Favorite Team</h2><p>You haven't selected a favorite team</p></div>
+                <div id="profileItem"><h2>Favorite Players</h2><p>Player 1: unselected</p><p>Player 2: unselected</p><p>Player 3: unselected</p></div>
+            </div>
       </div>
     );
-  }
+    }
+
+    componentDidUpdate() {
+        Meteor.call('getUserProfile', Meteor.userId, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            Session.set('profile', data);
+        });
+
+        var profile = Session.get('profile');
+        console.log(profile);
+    }
 }
 
 Profile.defaultProps = {

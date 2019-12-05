@@ -1,15 +1,17 @@
 {
   "ExpandedNodes": [
     "",
+    "\\client",
     "\\imports",
     "\\imports\\api",
-    "\\imports\\api\\remote",
     "\\imports\\startup",
     "\\imports\\ui",
     "\\imports\\ui\\pages",
-    "\\imports\\ui\\pages\\EditProfile",
+    "\\imports\\ui\\pages\\Login",
+    "\\imports\\ui\\pages\\Profile",
+    "\\imports\\ui\\pages\\Register",
     "\\server"
   ],
-  "SelectedNode": "\\server\\main.js",
+  "SelectedNode": "\\imports\\ui\\pages\\Profile\\Profile.js",
   "PreviewInSolutionExplorer": false
 }
