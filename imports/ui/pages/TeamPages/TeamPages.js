@@ -7,7 +7,7 @@ class TeamPages extends React.Component{
             <div className="team-pages-page">
                 <h2>Team Profiles</h2>
                 <a href="ArizonaCardinals.html">
-                    <img src="http://localhost:3000/TeamPages/Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style={{ width: 250, height: 250, border: 0 }} />
+                    <img src="Logos/ArizonaCardinals.png" alt="Arizona Cardinals" style={{ width: 250, height: 250, border: 0 }} />
                 </a>
 
                 <a href="AtlantaFalcons.html">
@@ -59,15 +59,15 @@ class TeamPages extends React.Component{
                 </a>
 
                 <a href="IndianapolisColts.html">
-                    <img src="Logos/IndianApolisColts.png" alt="IndianApolis Colts" style={{ width: 250, height: 250, border: 0 }} />
+                    <img src="Logos/IndianapolisColts.png" alt="Indianapolis Colts" style={{ width: 250, height: 250, border: 0 }} />
                 </a>
 
                 <a href="JacksonvilleJaguars.html">
-                    <img src="JacksonvilleJaguars.png" alt="Jacksonville Jaguars" style={{ width: 250, height: 250, border: 0 }} />
+                    <img src="Logos/JacksonvilleJaguars.png" alt="Jacksonville Jaguars" style={{ width: 250, height: 250, border: 0 }} />
                 </a>
 
                 <a href="KansasCityChiefs.html">
-                    <img src={"http://localhost:3000/TeamPages/Logos/KansasCityChiefs.png"} alt="Kansas City Chiefs" style={{ width: 250, height: 250, border: 0 }} />
+                    <img src="Logos/KansasCityChiefs.png" alt="Kansas City Chiefs" style={{ width: 250, height: 250, border: 0 }} />
                 </a>
 
                 <a href="LosAngelesChargers.html">
