@@ -1,15 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import {Layout, Menu, Row, Col } from 'antd';
 const { SubMenu } = Menu;
 
-const Navbar = ({ loggedIn }) => (
+const Navbar = ({ loggedIn, location }) => (
   <Menu
         theme="dark"
         mode="horizontal"
         style={{ lineHeight: '64px' }}
+        selectedKeys={[(() => {
+          const menuKey = location.pathname.substring(1);
+          return menuKey ? menuKey : 'newsfeed';
+        })()]}
     >
     <Menu.Item key="newsfeed">
       <NavLink to="/">News Feed</NavLink>
@@ -57,6 +61,7 @@ const Navbar = ({ loggedIn }) => (
 
 Navbar.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired
 };
 
-export default Navbar;
+export default withRouter(Navbar);
