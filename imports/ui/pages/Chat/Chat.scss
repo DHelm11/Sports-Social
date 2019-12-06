@@ -22,3 +22,17 @@
   float: right;
   padding-top: 5px;
 }
+.invite-button  {
+  float: right;
+  padding-top: 15px;
+}
+.chat-message-animate .ant-comment-content-detail {
+  animation: blinkingText 1s;
+}
+@keyframes blinkingText {
+  0%  { color: initial; }
+  49% { color: transparent; }
+  50% { color: initial; }
+  99% { color: transparent; }
+  100%{ color: initial; }
+}

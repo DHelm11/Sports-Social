@@ -14,21 +14,10 @@ chatRooms.find().observe({ added: ({_id}) => {
   }
 });
 Meteor.publish('chatRooms', function() {
-  const user = Meteor.user();
-  const privateChatRooms = new Set(user && user.privateChatRooms ? user.privateChatRooms : []);
-  chatRooms.find().forEach(chatRoom => {
-    chatRoom.unlocked = chatRoom.password ? privateChatRooms.has(chatRoom._id) : true;
-    chatRoom.password = !!chatRoom.password;
-    this.added("chatRooms", chatRoom._id, chatRoom);
-  });
-  Meteor.users.find(this.userId, { fields: { privateChatRooms: 1 } }).observeChanges({
-    changed: (userId, {privateChatRooms}) => {
-      privateChatRooms.forEach(chatRoom => {
-        this.changed("chatRooms", chatRoom, {unlocked: true});
-      });
-    }
-  });
-  this.ready();
+  return [
+    chatRooms.find(),
+    Meteor.users.find(this.userId, { fields: { privateChatRooms: 1 } })
+  ];
 });
 
 import accounts from './accounts';
@@ -43,8 +32,8 @@ Meteor.methods({
         throw new Meteor.Error("chatRoom.notFound");
       const user = Meteor.user();
       const privateChatRooms = user && user.privateChatRooms ? user.privateChatRooms : [];
-      if (room.password && room.password !== password && !privateChatRooms.find(x => x === name))
-        throw new Meteor.Error("chatRoom.incorrectPassword");
+      if (room.password && !privateChatRooms.find(x => x === name))
+        throw new Meteor.Error("chatRoom.accessDenied");
       return chatRoomMessages.get(name).collection.find().fetch();
     },
     "chat/inviteUser": (roomName, username) => {
@@ -57,8 +46,8 @@ Meteor.methods({
       recipient.privateChatRooms.push(roomName);
       Meteor.users.update({username}, recipient);
     },
-    "chat/createRoom": (name, password) => {
-      chatRooms.insert({_id: name, password});
+    "chat/createRoom": (name, private) => {
+      chatRooms.insert({_id: name, password: private});
       Meteor.users.update(Meteor.userId(), { $push: { privateChatRooms: name } });
     }
 });
