@@ -7,7 +7,7 @@ import './NewsFeed.scss'
 
 class Message extends React.Component {
   render() {
-    const {message, sender, date, likes, dislikes, action} = this.props;
+    const {message, sender, date, likes, dislikes, action, reply, showReply} = this.props;
     const actions = [
       <span key="comment-basic-like">
         <Tooltip title="Like">
@@ -39,7 +39,7 @@ class Message extends React.Component {
           </Tooltip>
         </span>
         : null,
-      <span key="comment-basic-reply-to"><Icon type="plus" /> Reply</span>,
+      <span key="comment-basic-reply-to" onClick={this.props.reply}><Icon type="plus" /> Reply</span>,
     ];
     return (
       <Comment
@@ -54,7 +54,19 @@ class Message extends React.Component {
                   <span>{moment(date).fromNow()}</span>
                 </Tooltip>
               }
-            />
+      >
+        {showReply && (
+          <div style={{marginTop: -20}}>
+          <TextArea
+                  rows={2}
+                  placeholder="comment"
+                  value=""
+                  onChange={null}
+                  onKeyPress={null} />
+          <Button type="primary" icon="plus" size="small" onClick={null}>Reply</Button>
+          </div>
+        )}
+      </Comment>
     );
   }
 }
@@ -68,7 +80,7 @@ const streamer = new Meteor.Streamer('publicNewsFeed');
 class NewsFeed extends React.Component {
   constructor() {
     super();
-    this.state = {messages: [], messageBoxText: ""};
+    this.state = {messages: [], messageBoxText: "", replying: null};
     streamer.on('message', message => {
       this.setState({messages: [message, ...this.state.messages]});
     });
@@ -144,6 +156,10 @@ class NewsFeed extends React.Component {
       <div>
         {messages.map(message =>
           <Message key={message._id} {...message}
+            showReply={message._id == this.state.replying}
+            reply={() => {
+              this.setState({ replying: this.state.replying ? null : message._id });
+            }}
             like={() => {
               streamer.emit('likePost', message._id);
               this.likePost(message._id, false, true);
