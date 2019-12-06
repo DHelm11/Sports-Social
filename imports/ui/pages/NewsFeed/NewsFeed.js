@@ -96,9 +96,8 @@ class NewsFeed extends React.Component {
       action: "",
       date: Date()
     };
-    //streamer.emit('message', message);
-    //this.setState({messages: [message, ...this.state.messages], messageBoxText: ""});
     Meteor.call("news-feed/create-post", message);
+    this.setState({messageBoxText: ""});
   }
   deletePost = id => {
     this.setState(state => ({
