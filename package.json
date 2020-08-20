@@ -17,7 +17,7 @@
   "dependencies": {
     "@babel/runtime": "^7.7.4",
     "antd": "^3.26.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "indexof": "0.0.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
